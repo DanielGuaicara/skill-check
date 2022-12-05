@@ -1,0 +1,39 @@
+image: php:7.3-fpm
+
+pipelines:
+  pull-requests: #This Pipiline will run in PR only
+    feature/*: #any branch with a feature prefix
+      - step:
+          name: PR Tests
+          caches: #Defining cache
+          - composer
+          script:
+            - apt-get update && apt-get install -qy unzip git libpq-dev curl postgresql postgresql-contrib
+            - docker-php-ext-install pdo pdo_pgsql
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+            - composer install
+            #- composer update
+            - ln -f -s .env.pipelines .env
+            - php artisan key:generate
+            - php artisan migrate
+            - php artisan passport:install --force
+            - php artisan db:seed
+            - php artisan serve &
+            - sleep 5
+            - php artisan test --log-junit ./test-reports/junit.xml
+            - sleep 5
+            - php artisan insights -v --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80
+            - sleep 5
+            - php artisan l5-swagger:generate
+            - curl -vk http://localhost:8000/api/documentation
+          services:
+            - postgresql
+
+definitions:
+  services:
+    postgresql:
+      image: postgres
+      environment:
+        POSTGRES_DATABASE: 'homestead'
+        POSTGRES_USER: 'homestead'
+        POSTGRES_PASSWORD: 'secret'

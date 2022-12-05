@@ -1,0 +1,1259 @@
+swagger: "3.0"
+components:
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Abort'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Forbidden'
+    TokenLogin:
+      description: The response contains the role and the token generated for the user with the login!
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Token_Login'
+    usersList:
+      description:  Lista de Usuarios
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserListResponse'
+    userShow:
+      description:  user
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserModel'
+    Success:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+    ImageResponse:
+      description: Image url
+      content:
+         multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/ImageResponse'
+    UserNotFound:
+      description: User Not Found!
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    GymListResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GymListResponse'
+    ChallengeMediaResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ChallengeMediaResponse'
+    GymShow:
+      description:  gym
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GymModel'
+    CheckRole:
+      description:  User Role
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRole'
+    EventShow:
+      description: event
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventModel'
+    eventsList:
+      description: events list
+      content: 
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/EventModel'
+    skillsList:
+      decription: skills list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SkillModel'
+    skillListShow:
+      decription: skills list show
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SkillListShowModel'
+    levelsList:
+      decription: levels list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/LevelModel'
+    interactionList:
+      description: interaction list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/InteractionModel'
+    categoriesList:
+      decription: categories list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/CategoryModel'
+    skillShow:
+      description: skill
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SkillModel'
+    SkillListList:
+      decription: skillList list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SkillListModel'
+    SkillListShow:
+      decription: skillList list show
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SkillListModel'
+    SkillListMyListResponse:
+      decription: skillList with skill assigns
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SkillsMyListModel'
+    ClassResponse:
+      decription: Class List
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClassModel'
+    ChallengeReponse:
+      description: Challenge Show
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ChallengeModel'
+    ChallengeListResponse:
+      decription: challenges list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChallengeModel'
+    GymnastResponse:
+      description: Gymnast members Show
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GymnastModel'
+    CompletedChallengeResponse:
+      description: Completed Challenge Show
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompletedChallengeModel'
+    InteractionNotificationResponse:
+      description: Interaction Notification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NoticationModel'         
+  schemas:
+    ImageResponse:
+      type: object
+      properties:
+        data:
+          type: string
+      example:
+        'url': 'www.wwww.com'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: string
+    Abort:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Forbidden:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Token_Login:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token
+        user_role:
+          type: string
+          description: User Role
+    UserModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        email_verified_at:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Success:
+      type: object
+      properties:
+        success:
+          type: boolean
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          $ref: '#/components/schemas/UserModel'
+        current_page:
+          type: integer
+        total:
+          type: integer
+        to:
+          type: integer
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type: string
+        first_page_url:
+          type: string
+        from:
+          type: integer
+    ChallengeMediaResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          $ref: '#/components/schemas/ChallengeMediaModel'
+        challenge_id:
+          type: integer
+        gym_id:
+          type: integer
+        media_path:
+          type: string
+        media_caption:
+          type: string
+        challenge_name:
+          type: string
+        created_at:
+          type: date
+    GymListResponse:
+      type: object
+      properties:
+        data:
+          type: string
+          $ref: '#/components/schemas/GymModel'
+        current_page:
+          type: integer
+        total:
+          type: integer
+        to:
+          type: integer
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type: string
+        first_page_url:
+          type: string
+        from:
+          type: integer
+    CreateGymRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        settings:
+          type: object
+      example:
+        'name': 'GymName'
+        'description': 'GymDescription'
+        'settings':
+              'address': 'park avenue'
+              'city': 'City'
+              'state': 'state'
+              'zipcode': '6003'
+              'email': 'body@body.com'
+              'is_leaderboard_enabled': false
+              'is_dashboard_editable': false
+              'is_generic_certificate_enabled': false
+              'leaderboard_top': 12
+              'redeem_points_url': 'https://www.body.com'
+              'theme':
+                'primary':
+                  'color': '#d22333'
+                  'hover': '#d2225d'
+                'secondary':
+                  'color': '#7555a4'
+                  'hover': '#5d4482'
+    UpdateGymRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        settings:
+          type: object
+        is_stripe:
+          type: boolean
+      example:
+        name: 'GymName'
+        description: 'nice'
+        settings:
+              'id': '100'
+              'address': 'park avenue'
+              'city': 'City'
+              'state': 'state'
+              'zipcode': '6003'
+              'email': 'body@body.com'
+              'is_leaderboard_enabled': false
+              'is_dashboard_editable': false
+              'is_generic_certificate_enabled': false
+              'leaderboard_top': 12
+              'redeem_points_url': 'https://www.body.com'
+              'theme':
+                'primary':
+                  'color': '#d22333'
+                  'hover': '#d2225d'
+                'secondary':
+                  'color': '#7555a4'
+                  'hover': '#5d4482'
+        is_stripe: false
+    GymModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        settings:
+          type: object
+        is_stripe:
+          type: boolean
+      example:
+        name: 'GymName'
+        description: 'nice'
+        settings:
+              'id': '100'
+              'address': 'park avenue'
+              'city': 'City'
+              'state': 'state'
+              'zipcode': '6003'
+              'email': 'body@body.com'
+              'is_leaderboard_enabled': false
+              'is_dashboard_editable': false
+              'is_generic_certificate_enabled': false
+              'leaderboard_top': 12
+              'redeem_points_url': 'https://www.body.com'
+              'theme':
+                'primary':
+                  'color': '#d22333'
+                  'hover': '#d2225d'
+                'secondary':
+                  'color': '#7555a4'
+                  'hover': '#5d4482'
+        is_stripe: false
+    GymnastModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        birth_date:
+          type: date
+        life_time_score:
+          type: integer
+        current_streak_points:
+          type: integer
+        last_streak:
+          type: date
+        about:
+          type: string
+        gyms_has_users_gym_id:
+          type: integer
+        gyms_has_users_user_id:
+          type: integer
+        created_at:
+          type: date-time
+        updated_at:
+          type: datedate-time
+        deleted_at:
+          type: date-time
+      example:
+        id: 0
+        first_name: 'name'
+        last_name: 'lastname'
+        birth_date:
+        life_time_score: 0
+        current_streak_points: 0
+        ongoing_points: 0
+        last_streak: null
+        about: 'string'
+        gyms_has_users_gym_id: 0
+        gyms_has_users_user_id: 0
+        created_at: null
+        updated_at: null
+        deleted_at: null
+    UserRole:
+      type: object
+      properties:
+        role:
+          type: string
+        gyms:
+          type: object
+    EventModel:
+      type: object
+      properties:
+        name:
+          type: string
+        abbrev:
+          type: string
+      example:
+        'name': 'Event 1'
+        'abbrev': 'E1'
+    SkillModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        category_id:
+          type: integer
+        certificate:
+          type: boolean
+        event_id:
+          type: integer
+        level:
+          type: string
+        level_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    LevelModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        level:
+          type: string
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    InteractionModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+    CategoryModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    SkillListModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        gym_id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+    SkillSkillListModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        category_id:
+          type: integer
+        certificate:
+          type: boolean
+        event_id:
+          type: integer
+        level_id:
+          type: integer
+        order:
+          type: integer
+    EventSkillListModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkillSkillListModel'
+    SkillListShowModel:
+      type: object
+      properties:
+        skill_list_id:
+          type: integer
+        name:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventSkillListModel'
+    SkillsMyListModel:
+      type: object
+      properties:
+        data:
+        skill_list_id:
+          type: integer
+        name:
+          type: string
+        myList:
+          type: object
+          example:
+            'skill_id': '1'
+            'name': 'Forward Roll'
+            'order': '3'
+    ClassModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        skill_list_id:
+          type: integer
+    ChallengeModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        gym_id:
+          type: integer
+        class_id:
+          type: integer
+        name:
+          type: string
+        description: string
+        points:
+          type: integer
+        is_featured:
+          type: boolean
+        featured_date:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CompletedChallengeModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        gymnast_id:
+          type: integer
+        challenge_id:
+          type: integer
+        media_path:
+          type: string
+        media_caption: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    NoticationModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        feed_id:
+          type: integer
+        interaction_id:
+          type: integer
+        gymnast_id:
+          type: integer
+        notified:
+          type: boolean
+        type:
+          type: integer
+        description:
+          type: string
+    ChallengeMediaModel:
+      type: object
+      properties:
+        challenge_id:
+          type: integer
+        gym_id:
+          type: integer
+        media_path:
+          type: string
+        media_caption:
+          type: string
+        challenge_name:
+          type: string
+        created_at:
+          type: date
+  parameters:
+    email:
+      name: email
+      in: query
+      required: true
+      schema:
+        type: string
+      description: User email
+    password:
+      name: password
+      in: query
+      required: true
+      schema:
+        type: string
+      description: User Password
+    repeatPassword:
+      name: repeat_password
+      in: query
+      required: true
+      schema:
+        type: string
+      description: User Password
+    name:
+      name: name
+      in: query
+      required: true
+      schema:
+        type: string
+      description: User name
+    id:
+      name: id
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: User id
+    gymnastU:
+      name: id
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: User Id
+    UserPathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: User Id
+    skillPathId:
+      name: skillPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: skillPathId
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+      description: Limit of items per page
+    order:
+      name: order
+      in: query
+      schema:
+        type: string
+      description: asc or desc
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+      description: column to start search, default 0..then 30..60..90
+    search:
+      name: search
+      in: query
+      schema:
+        type: string
+      description: search
+    passwordUpdate:
+      name: password
+      in: query
+      required: false
+      schema:
+        type: string
+      description: User Password
+    repeatPasswordUpdate:
+      name: repeat_password
+      in: query
+      required: false
+      schema:
+        type: string
+      description: User Password
+    idPath:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Integer Id
+    gymPathId:
+      name: gymPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: gymPathId
+    eventPathId:
+      name: eventPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: eventPathId
+    skillListPathId:
+      name: skillListPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: skillListPathId
+    emailPath:
+      name: email
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Email
+    gymgymnastU:
+      name: gymgymnastU
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Gym User Id
+    gymIdMultiple:
+      name: gym_id[]
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          type: integer
+      description: gym_ids
+    gymId:
+      name: gym_id
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: Gym id
+    url:
+      name: url
+      in: query
+      required: true
+      schema:
+        type: string
+      description: url
+    firstName:
+      name: first_name
+      in: query
+      required: true
+      schema:
+        type: string
+      description: First name
+    lastName:
+      name: last_name
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Last name
+    birthDate:
+      name: birth_date
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date-time
+      description: birth Date
+    nameSkill:
+      name: name
+      in: query
+      required: true
+      schema:
+        type: string
+      decription: skill name
+    descriptionSkill:
+      name: description
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: skill description
+    categoryIdSkill:
+      name: category_id
+      in: query
+      required: false
+      schema:
+        type: integer
+      decription: skill category
+    levelIdSkill:
+      name: level_id
+      in: query
+      required: false
+      schema:
+        type: integer
+      decription: skill level
+    certificateSkill:
+      name: certificate
+      in: query
+      required: false
+      schema:
+        type: boolean
+      decription: skill certificate
+    nameSkillList:
+      name: name
+      in: query
+      required: true
+      schema:
+        type: string
+      decription: skill list name
+    deletedSkillList:
+      name: deleted
+      in: path
+      required: false
+      schema:
+        type: string
+      description: specify whether to return deleted or not
+    skillId:
+      name: skill_id
+      in: query
+      required: true
+      schema:
+        type: integer
+      decription: skill ids
+    skillListId:
+      name: skill_list_id
+      in: query
+      required: true
+      schema:
+        type: integer
+      decription: skill list id
+    skillListOrder:
+      name: order
+      in: query
+      required: true
+      schema:
+        type: integer
+      decription: order skill list
+    description:
+      name: description
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: description
+    classPathId:
+      name: classPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Class Id
+    className:
+      name: name
+      in: query
+      required: true
+      schema:
+        type: string
+      decription: Class name
+    deleted:
+      name: deleted
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: list deleted
+    challengeName:
+      name: name
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Challenge name
+    challengeDescription:
+      name: description
+      in: query
+      required: true
+      schema:
+        type: string
+      decription: description
+    classId:
+      name: class_id
+      in: query
+      required: false
+      schema:
+        type: integer
+      descripcion: Classes id
+    challengePoints:
+      name: challenge points
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: challenge Points
+    challengeIsDaily:
+      name: is_featured
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: challenge Is Daily
+    challengeDailyExpirationDate:
+      name: featured_date
+      in: query
+      schema:
+        type: string
+        format: date
+      decription: challenge daily expiration date
+    about:
+      name: about
+      in: query
+      required: false
+      schema:
+        type: string
+      description: about of gymnast
+    challengePathId:
+      name: challegePathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Challenge Id
+    gymnastMemberPathId:
+      name: gymnastMemberPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Gymnast Id
+    classIdMultiple:
+      name: class_id[]
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          type: integer
+      description: class ids
+    timezone:
+      name: timezone
+      in: query
+      required: false
+      schema:
+        type: string
+      description: timezone
+    file:
+      name: file
+      in: formData
+      required: false
+      schema:
+        type: file
+      description: timezone
+    progressStatus:
+      name: progress_status
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Progress Status
+    challengeId:
+      name: challegen id
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: Challenge Id
+    mediaPath:
+      name: media path
+      in: query
+      required: false
+      schema:
+        type: string
+      description: media path
+    mediaCaption:
+      name: media caption
+      in: query
+      required: false
+      schema:
+        type: string
+      description: media
+    code:
+      name: code
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Code
+    icon:
+      name: icon
+      in: formData
+      required: false
+      schema:
+        type: file
+      description: icon
+    feedPathId:
+      name: feedPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Feed Id
+    gymnastMemberId:
+      name: member_id
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: Gymnast member Id
+    isComment:
+      name: is_comment
+      in: query
+      required: true
+      schema:
+        type: boolean
+      description: 0 or 1
+    comment:
+      name: comment
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comments
+    interactionId:
+      name: interaction_id
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: Interaction Id
+    codePath:
+      name: codePath
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Code Interaction
+    nameInteraction:
+      name: name
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: skill name
+    token:
+      name: token
+      in: query
+      required: true
+      schema:
+        type: string
+      decription: token
+    tokenPathId:
+      name: tokenPathId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Token
+    notificationIdPathId:
+      name: notificationIdPathId
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: notification Id opcional
+    customer_id:
+      name: customer_id
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: Stripe customer id (OPTIONAL)
+    subscription_id:
+      name: subscription_id
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: Stripe subscription id
+    tokenOptional:
+      name: token
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: token optional
+    imgProfile:
+      name: img_profile
+      in: query
+      required: false
+      schema:
+        type: string
+      decription: url image profile
+    gymnastUserId:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Gymnast User Id
+    column:
+      name: column
+      in: query
+      schema:
+        type: string
+      description: column to filter search
+    title:
+      name: title
+      in: query
+      schema:
+        type: string
+      description: title
+    notificationPathId:
+      name: id
+      in: query
+      schema:
+        type: string
+      description: notification Id
